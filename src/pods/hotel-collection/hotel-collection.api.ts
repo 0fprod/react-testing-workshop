@@ -1,5 +1,5 @@
 import Axios from 'axios';
-import { baseApiUrl } from 'core';
+import { baseApiUrl } from '../../core';
 
 export interface HotelEntityApi {
   id: string;
@@ -44,4 +44,4 @@ const getHotelsUrl = `${baseApiUrl}/api/hotels`;
 // TODO: Just only managing the "happy path", adding error handling here or upper level
 // would be a good idea
 export const getHotelCollection = (): Promise<HotelEntityApi[]> =>
-  Axios.get<HotelEntityApi[]>(getHotelsUrl).then(({ data }) => data);
+  Axios.get<HotelEntityApi[]>(getHotelsUrl).then(response => response.data);
