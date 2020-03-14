@@ -1,10 +1,13 @@
 import * as api from './hotel-collection.api';
-import { renderHook } from '@testing-library/react-hooks';
+import { renderHook, act } from '@testing-library/react-hooks';
 import { useHotelCollection } from './hotel-collection.hook';
-import Axios from 'axios';
+import { basePicturesUrl } from '../../core/const';
+import { HotelEntityVm } from './hotel-collection.vm';
+import { mapToCollection } from '../../common/mappers';
+import { mapFromApiToVm } from './hotel-collection.mapper';
 
 describe('Hotel-collection hook specs', () => {
-  it('should return an hotel collection when its called', done => {
+  it('hould return an hotel collection when its called', async () => {
     //Arrange
     const hotelEntity: api.HotelEntityApi[] = [
       {
@@ -49,23 +52,30 @@ describe('Hotel-collection hook specs', () => {
       },
     ];
 
+    const expectedResult: HotelEntityVm[] = mapToCollection(
+      hotelEntity,
+      mapFromApiToVm
+    );
+
     const getStub = jest
-      .spyOn(Axios, 'get')
-      .mockResolvedValue({ data: hotelEntity });
+      .spyOn(api, 'getHotelCollection')
+      .mockResolvedValue(hotelEntity);
 
     //Act
-    api.getHotelCollection().then(response => {
-      expect(getStub).toHaveBeenCalled();
-      expect(response).toEqual(hotelEntity);
-      done();
+
+    const { result, waitForNextUpdate } = renderHook(() =>
+      useHotelCollection()
+    );
+    act(() => {
+      result.current.loadHotelCollection();
     });
 
-    // const { result, waitForNextUpdate } = renderHook(() =>
-    //   useHotelCollection()
-    // );
-    //Assert
-    //expect(result.current.hotelCollection).toEqual([]);
+    expect(result.current.hotelCollection).toEqual([]);
 
-    //await waitForNextUpdate();
+    await waitForNextUpdate();
+
+    //Assert
+    expect(getStub).toHaveBeenCalled();
+    expect(result.current.hotelCollection).toEqual(expectedResult);
   });
 });

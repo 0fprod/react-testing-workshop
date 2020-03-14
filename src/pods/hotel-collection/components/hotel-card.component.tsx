@@ -32,7 +32,7 @@ export const HotelCard: React.FunctionComponent<Props> = props => {
   const classes = useStyles(props);
 
   return (
-    <Card className={classes.card}>
+    <Card className={classes.card} data-testid="hotelCardTestId">
       <CardHeader
         avatar={<Avatar aria-label="Hotel">{hotel.rating}</Avatar>}
         action={

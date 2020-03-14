@@ -61,6 +61,7 @@ describe('Hotel-collection mapper specs', () => {
       tripAdvisorRatingUrl:
         'http://www.tripadvisor.com/img/cdsi/img2/ratings/traveler/3.5-12345-4.gif',
     };
+
     const expectedRestul: HotelEntityVm = {
       id: '0248058a-27e4-11e6-ace6-a9876eff01b3',
       picture: `${baseApiUrl}/thumbnails/50947_264_t.jpg`,
@@ -70,8 +71,10 @@ describe('Hotel-collection mapper specs', () => {
       rating: 4,
       address: '1415 5th Ave',
     };
+
     // Act
     const result: HotelEntityVm = mapFromApiToVm(apiModel);
+    // Assert
     expect(expectedRestul).toEqual(result);
   });
 });
