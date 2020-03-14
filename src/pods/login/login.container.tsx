@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useHistory } from 'react-router-dom';
 import { LoginComponent } from './login.component';
-import { linkRoutes, SessionContext } from 'core';
+import { linkRoutes, SessionContext } from '../../core';
 import { LoginEntityVm, createEmptyLogin } from './login.vm';
 import { validateCredentials } from './login.api';
 
@@ -21,8 +21,8 @@ export const LoginContainer = () => {
         areValidCredentials
           ? navigateToHotel(loginInfo)
           : alert(
-              'invalid credentials, use admin/test, excercise: display a mui snackbar instead of this alert.'
-            );
+            'invalid credentials, use admin/test, excercise: display a mui snackbar instead of this alert.'
+          );
       }
     );
   };

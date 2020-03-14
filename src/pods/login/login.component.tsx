@@ -4,7 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardContent from '@material-ui/core/CardContent';
-import { TextField } from 'common/components/forms';
+import { TextField } from '../../common/components/forms';
 import Button from '@material-ui/core/Button';
 import { LoginEntityVm } from './login.vm';
 import { formValidation } from './login.validation';
@@ -37,6 +37,7 @@ export const LoginComponent: React.FunctionComponent<Props> = props => {
             render={({ handleSubmit, submitting, pristine, values }) => (
               <form onSubmit={handleSubmit} noValidate>
                 <Field
+                  data-testid="nameField"
                   fullWidth
                   name="login"
                   component={TextField}
@@ -47,6 +48,7 @@ export const LoginComponent: React.FunctionComponent<Props> = props => {
                   }
                 />
                 <Field
+                  data-testid="passwordField"
                   fullWidth
                   name="password"
                   component={TextField}
@@ -56,7 +58,7 @@ export const LoginComponent: React.FunctionComponent<Props> = props => {
                     formValidation.validateField(meta.name, value)
                   }
                 />
-                <Button type="submit" variant="contained" color="primary">
+                <Button type="submit" variant="contained" color="primary" data-testid="submitBtn">
                   Login
                 </Button>
               </form>

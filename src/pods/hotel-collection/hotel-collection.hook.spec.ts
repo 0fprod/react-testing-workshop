@@ -1,7 +1,6 @@
 import * as api from './hotel-collection.api';
 import { renderHook, act } from '@testing-library/react-hooks';
 import { useHotelCollection } from './hotel-collection.hook';
-import { basePicturesUrl } from '../../core/const';
 import { HotelEntityVm } from './hotel-collection.vm';
 import { mapToCollection } from '../../common/mappers';
 import { mapFromApiToVm } from './hotel-collection.mapper';
